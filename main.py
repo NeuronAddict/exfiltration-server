@@ -1,13 +1,13 @@
 #! /usr/bin/env python3
 import argparse
+from http.server import HTTPServer, BaseHTTPRequestHandler
+
 
 parser = argparse.ArgumentParser('Exfiltration server.\nLog all queries and print result to exfiltrate data via http.')
 parser.add_argument('port', default='8000', type=int, nargs='?', help='Port to listen on. Default: 8000')
 parser.add_argument('--bind', default='0.0.0.0', nargs='?', help='IP to bind. Default: 0.0.0.0')
 
 args = parser.parse_args()
-
-from http.server import HTTPServer, BaseHTTPRequestHandler
 
 
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
