@@ -1,11 +1,18 @@
 #! /usr/bin/env python3
+import argparse
+
+parser = argparse.ArgumentParser('Exfiltration server.\nLog all queries and print result to exfiltrate data via http.')
+parser.add_argument('port', default='8000', type=int, nargs='?', help='Port to listen on. Default: 8000')
+parser.add_argument('--bind', default='0.0.0.0', nargs='?', help='IP to bind. Default: 0.0.0.0')
+
+args = parser.parse_args()
 
 from http.server import HTTPServer, BaseHTTPRequestHandler
+
 
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
-
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.end_headers()
@@ -21,5 +28,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.flush()
 
-httpd = HTTPServer(('localhost', 8000), SimpleHTTPRequestHandler)
+
+print('start listening on {}:{}'.format(args.bind, args.port))
+httpd = HTTPServer((args.bind, args.port), SimpleHTTPRequestHandler)
 httpd.serve_forever()
