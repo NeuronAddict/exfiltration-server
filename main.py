@@ -21,12 +21,12 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         content_length = int(self.headers['Content-Length'])
         body = self.rfile.read(content_length)
-        self.log_message('{}\n'.format(body.decode()))
-        self.log_message(self.path)
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.end_headers()
         self.wfile.flush()
+        self.log_message(self.path)
+        self.log_message('{}\n'.format(body.decode()))
 
 
 print('start listening on {}:{}'.format(args.bind, args.port))
