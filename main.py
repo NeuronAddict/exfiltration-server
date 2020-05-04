@@ -1,7 +1,22 @@
 #! /usr/bin/env python3
 import argparse
+from termcolor import colored
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
+banner = '''
+             _   _                              __ _ _ _             _   _                                            
+            | | | |                            / _(_) | |           | | (_)                                           
+ _ __  _   _| |_| |__   ___  _ __     _____  _| |_ _| | |_ _ __ __ _| |_ _  ___  _ __    ___  ___ _ ____   _____ _ __ 
+| '_ \| | | | __| '_ \ / _ \| '_ \   / _ \ \/ /  _| | | __| '__/ _` | __| |/ _ \| '_ \  / __|/ _ \ '__\ \ / / _ \ '__|
+| |_) | |_| | |_| | | | (_) | | | | |  __/>  <| | | | | |_| | | (_| | |_| | (_) | | | | \__ \  __/ |   \ V /  __/ |   
+| .__/ \__, |\__|_| |_|\___/|_| |_|  \___/_/\_\_| |_|_|\__|_|  \__,_|\__|_|\___/|_| |_| |___/\___|_|    \_/ \___|_|   
+| |     __/ |                                                                                                         
+|_|    |___/                                                                                                                                                                                                                                                                                                                 
+
+https://github.com/NeuronAddict/exfiltration-server
+'''
+
+print(colored(banner, 'green'))
 
 parser = argparse.ArgumentParser('Exfiltration server.\nLog all queries and print result to exfiltrate data via http.')
 parser.add_argument('port', default='8000', type=int, nargs='?', help='Port to listen on. Default: 8000')
